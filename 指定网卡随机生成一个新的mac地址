@@ -1,0 +1,45 @@
+@echo off
+set a=012345789ABCDEF
+set dew=26AE
+set /a d2=%random%%%3+1
+set /a b=%random%%%14+1
+set /a c=%random%%%14+1
+set /a d=%random%%%14+1
+set /a e=%random%%%14+1
+set /a f=%random%%%14+1
+set /a g=%random%%%14+1
+set /a h=%random%%%14+1
+set /a i=%random%%%14+1
+set /a j=%random%%%14+1
+set /a k=%random%%%14+1
+set /a l=%random%%%14+1
+set /a m=%random%%%14+1
+set MAC=!a:~%b%,1!!dew:~%d2%,1!!a:~%d%,1!!a:~%e%,1!!a:~%f%,1!!a:~%g%,1!!a:~%h%,1!!a:~%i%,1!!a:~%j%,1!!a:~%k%,1!!a:~%l%,1!!a:~%m%,1!
+set NAME=以太网 4
+
+::延迟环境变量扩展
+setlocal enabledelayedexpansion
+title 随机生成一个新的MAC地址
+color 0A
+::mode con: cols=50 lines=25
+
+
+echo 快速修改MAC地址工具
+echo 请确认以下信息：
+echo 目标MAC：%MAC%
+echo 目标网卡：%NAME%
+pause
+
+echo 正在设置MAC地址 ...
+
+::使用macshift.exe这个工具修改MAC地址
+"C:\macshift.exe" %MAC% -i "%NAME%"
+
+echo MAC地址设置完毕!
+
+echo 正在重启本地连接(xp系统下貌似没用)
+netsh interface set interface "%NAME%" disable
+netsh interface set interface "%NAME%" enable
+echo 本地连接重启完毕！
+
+pause
