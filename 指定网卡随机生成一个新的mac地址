@@ -33,7 +33,7 @@ pause
 echo 正在设置MAC地址 ...
 
 ::使用macshift.exe这个工具修改MAC地址
-"C:\macshift.exe" %MAC% -i "%NAME%"
+"%~dp0tools\macshift.exe" %MAC% -i "%NAME%"
 
 echo MAC地址设置完毕!
 
